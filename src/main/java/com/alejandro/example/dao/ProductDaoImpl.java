@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +29,7 @@ public class ProductDaoImpl implements IProductDao {
 	private static String selectByIdQuery;
 	private static String selectAllQuery;
 	private static String deleteByIdQuery;
+	private static String getIdAssigned;
 	
 	static {
 		try {
@@ -39,6 +39,7 @@ public class ProductDaoImpl implements IProductDao {
 			selectAllQuery = bundle.getString("findAll");
 			selectByIdQuery = bundle.getString("findById");
 			deleteByIdQuery = bundle.getString("delete");
+			getIdAssigned = bundle.getString("getIdAssigned");
 		} catch (MissingResourceException e ) {
 			log.error("Error to get resource", e);
 		}
@@ -83,4 +84,8 @@ public class ProductDaoImpl implements IProductDao {
 		return this.template.update(deleteByIdQuery, args ) == 1;
 	}
 
+	@Override
+	public Long getIdAssigned() {
+		return  this.template.queryForObject(getIdAssigned, Long.class);
+	}
 }

@@ -11,10 +11,17 @@ public class Review implements Serializable {
 	private Long id;
 	private String description;
 	private Short rainting;
+	private Long idProduct;
 	
 	public Review() {
 	}
 
+	public Review(String description, Short rainting, Long idProduct) {
+		this.description = description;
+		this.rainting = rainting;
+		this.idProduct = idProduct;
+	}
+	
 	public Review(String description, Short rainting) {
 		this.description = description;
 		this.rainting = rainting;
@@ -42,6 +49,14 @@ public class Review implements Serializable {
 
 	public void setRainting(Short rainting) {
 		this.rainting = rainting;
+	}
+
+	public Long getIdProduct() {
+		return idProduct;
+	}
+
+	public void setIdProduct(Long idProduct) {
+		this.idProduct = idProduct;
 	}
 
 	@Override
