@@ -64,7 +64,6 @@ public class ProductServiceImpl implements ProductService {
 					.collect(Collectors.toSet());
 			reviews.forEach(this.reviewDao::save);
 		} catch(Exception e) {
-			System.out.println("problem: " + e.getMessage());
 			throw new ElementNorSavedException();
 		}
 	}
