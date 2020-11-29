@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS review;
 
 CREATE TABLE product (
 	  id BIGINT auto_increment PRIMARY KEY,
-	  name VARCHAR(10) NOT NULL,
+	  name VARCHAR(20) NOT NULL,
 	  price DECIMAL  NOT NULL,
 	  create_at timestamp NOT NULL
 );

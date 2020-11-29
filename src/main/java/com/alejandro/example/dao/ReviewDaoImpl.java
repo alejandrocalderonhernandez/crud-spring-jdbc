@@ -40,6 +40,7 @@ public class ReviewDaoImpl implements IReviewDao {
 	
 	@Override
 	public boolean delete(Long id) {
-		return false;
+		Object[] args = {id};
+		return this.template.update(deleteByIdQuery, args) == 1;
 	}
 }

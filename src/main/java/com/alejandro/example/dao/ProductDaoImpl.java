@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.alejandro.example.model.Product;
-import com.alejandro.example.utils.DaoUtils;
+import com.alejandro.example.utils.Utils;
 
 @Repository
 public class ProductDaoImpl implements IProductDao {
@@ -24,22 +24,20 @@ public class ProductDaoImpl implements IProductDao {
 	@Autowired
 	private JdbcTemplate template;
 			
-	private static String upsertQuery;
+	private static String updateQuery;
 	private static String insertQuery;
 	private static String selectByIdQuery;
 	private static String selectAllQuery;
 	private static String deleteByIdQuery;
-	private static String getIdAssigned;
 	
 	static {
 		try {
 			ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_PATH);
-			upsertQuery = bundle.getString("upsert");
+			updateQuery = bundle.getString("update");
 			insertQuery = bundle.getString("save");
 			selectAllQuery = bundle.getString("findAll");
 			selectByIdQuery = bundle.getString("findById");
 			deleteByIdQuery = bundle.getString("delete");
-			getIdAssigned = bundle.getString("getIdAssigned");
 		} catch (MissingResourceException e ) {
 			log.error("Error to get resource", e);
 		}
@@ -68,13 +66,13 @@ public class ProductDaoImpl implements IProductDao {
 
 	@Override
 	public boolean save(Product model) {
-	      Timestamp now = DaoUtils.toTimestamp(LocalDateTime.now());
-		if(model.getId() != null) {
+	      Timestamp now = Utils.toTimestamp(LocalDateTime.now());
+		if(model.getId() == null) {
 			Object[] args = {model.getName(), model.getPrice(), now};
 			return this.template.update(insertQuery, args) == 1;
 		} else {
-			Object[] args = {model.getId(), model.getName(), model.getPrice(), now};
-			return this.template.update(upsertQuery, args ) == 1;
+			Object[] args = { model.getName(), model.getPrice(), now, model.getId(),};
+			return this.template.update(updateQuery, args ) == 1;
 		}
 	}
 
@@ -84,8 +82,4 @@ public class ProductDaoImpl implements IProductDao {
 		return this.template.update(deleteByIdQuery, args ) == 1;
 	}
 
-	@Override
-	public Long getIdAssigned() {
-		return  this.template.queryForObject(getIdAssigned, Long.class);
-	}
 }
