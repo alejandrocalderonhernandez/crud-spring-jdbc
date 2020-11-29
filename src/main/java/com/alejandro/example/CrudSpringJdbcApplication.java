@@ -30,7 +30,7 @@ public class CrudSpringJdbcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		//Get records inserted into database
+		//Get records inserted into database 
 		log .info(this.service.findAll().toString());
 		
 		//Create a new record and insert, the id should be 6

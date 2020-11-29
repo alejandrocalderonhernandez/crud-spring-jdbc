@@ -97,11 +97,15 @@ public class Product implements Serializable {
 			p.setName(rs.getString("name"));
 			p.setPrice(rs.getDouble("price"));
 			p.setCreateAt(rs.getTimestamp("create_at").toLocalDateTime());
-		    if(rs.getString("description") != null ) {
-		    	String description = rs.getString("description");
-		    	Short rating = rs.getShort("rating");
-		    	p.setTempReview(new Review(description, rating));
-		    }
+		   try {
+			    if(rs.getString("description") != null ) {
+			    	String description = rs.getString("description");
+			    	Short rating = rs.getShort("rating");
+			    	p.setTempReview(new Review(description, rating));
+			    }
+			} catch(Exception e) {
+				return p;
+			}
 			return p;
 		};
 	}

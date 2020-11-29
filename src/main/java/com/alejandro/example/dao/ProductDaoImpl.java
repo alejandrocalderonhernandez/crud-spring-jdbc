@@ -71,7 +71,7 @@ public class ProductDaoImpl implements IProductDao {
 			Object[] args = {model.getName(), model.getPrice(), now};
 			return this.template.update(insertQuery, args) == 1;
 		} else {
-			Object[] args = { model.getName(), model.getPrice(), now, model.getId(),};
+			Object[] args = { model.getName(), model.getPrice(), now, model.getId()};
 			return this.template.update(updateQuery, args ) == 1;
 		}
 	}

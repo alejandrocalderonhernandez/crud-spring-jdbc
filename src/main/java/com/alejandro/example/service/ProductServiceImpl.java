@@ -20,9 +20,6 @@ import com.alejandro.example.utils.IdNotFoundException;
 @Transactional(noRollbackFor = Exception.class)
 public class ProductServiceImpl implements ProductService {
 	
-	
-	private static final String TABLE_NAME = "product";
-	
 	private IProductDao productDao;
 	private IReviewDao reviewDao;
 	private DaoUtil  daoUtils;
