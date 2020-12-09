@@ -22,7 +22,7 @@ public class CrudSpringJdbcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ProductService service;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CrudSpringJdbcApplication.class, args);
 	}
